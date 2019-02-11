@@ -1,0 +1,3 @@
+[submodule "rocketmq-client-cpp"]
+	path = librocketmq-cpp/rocketmq-client-cpp
+	url = https://github.com/apache/rocketmq-client-cpp.git
