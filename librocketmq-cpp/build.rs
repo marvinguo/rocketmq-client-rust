@@ -1,6 +1,7 @@
 use std::env;
 use std::fs;
 use std::path::PathBuf;
+use std::process::{Command};
 
 
 fn fail_on_empty_directory(name: &str) {
@@ -16,4 +17,12 @@ fn fail_on_empty_directory(name: &str) {
 
 fn main() {
     fail_on_empty_directory("rocketmq-client-cpp");
+
+    let output = Command::new("sh")
+        .arg("rocketmq-client-cpp/build.sh")
+        .output()
+        .unwrap();
+
+    //let hello = output.stdout;
+    //println!("{:?}", hello);
 }
