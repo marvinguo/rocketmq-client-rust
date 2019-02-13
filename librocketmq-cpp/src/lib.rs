@@ -40,6 +40,9 @@ ROCKETMQCLIENT_API int SetProducerMaxMessageSize(CProducer *producer, int size);
 ROCKETMQCLIENT_API int SendMessageSync(CProducer *producer, CMessage *msg, CSendResult *result);
 ROCKETMQCLIENT_API int SendMessageAsync(CProducer *producer, CMessage *msg, CSendSuccessCallback cSendSuccessCallback , CSendExceptionCallback cSendExceptionCallback);
 ROCKETMQCLIENT_API int SendMessageOneway(CProducer *producer,CMessage *msg);
+
+//这里有一个callback，需要用rust来处理
+//大部分的函数都需要用到
 ROCKETMQCLIENT_API int SendMessageOrderly(CProducer *producer, CMessage *msg, QueueSelectorCallback callback, void *arg, int autoRetryTimes, CSendResult *result);
 
 */
