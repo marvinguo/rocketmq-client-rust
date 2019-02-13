@@ -1,7 +1,42 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+//#[link(name = "rocketmq", kind = "static")]
+extern {
+    fn CreateMessage();
+    fn CreateProducer();
+    fn CreatePushConsumer();
+    fn DestroyMessage();
+    fn DestroyProducer();
+    fn DestroyPushConsumer();
+    fn GetMessageBody();
+    fn GetMessageId();
+    fn GetMessageKeys();
+    fn GetMessageTags();
+    fn GetMessageTopic();
+    fn RegisterMessageCallback();
+    fn SendMessageSync();
+    fn SetByteMessageBody();
+    fn SetMessageBody();
+    fn SetMessageKeys();
+    fn SetMessageTags();
+    fn SetProducerCompressLevel();
+    fn SetProducerGroupName();
+    fn SetProducerInstanceName();
+    fn SetProducerLogFileNumAndSize();
+    fn SetProducerLogLevel();
+    fn SetProducerMaxMessageSize();
+    fn SetProducerNameServerAddress();
+    fn SetProducerSendMsgTimeout();
+    fn SetProducerSessionCredentials();
+    fn SetPushConsumerInstanceName();
+    fn SetPushConsumerLogFileNumAndSize();
+    fn SetPushConsumerLogLevel();
+    fn SetPushConsumerMessageBatchMaxSize();
+    fn SetPushConsumerNameServerAddress();
+    fn SetPushConsumerSessionCredentials();
+    fn SetPushConsumerThreadCount();
+    fn ShutdownProducer();
+    fn ShutdownPushConsumer();
+    fn StartProducer();
+    fn StartPushConsumer();
+    fn Subscribe();
 }
+

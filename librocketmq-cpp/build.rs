@@ -18,7 +18,7 @@ fn fail_on_empty_directory(name: &str) {
 fn main() {
     fail_on_empty_directory("rocketmq-client-cpp");
 
-    let output = Command::new("sh")
+    let _output = Command::new("sh")
         .arg("rocketmq-client-cpp/build.sh")
         .output()
         .unwrap();
