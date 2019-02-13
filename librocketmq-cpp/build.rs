@@ -18,6 +18,25 @@ fn fail_on_empty_directory(name: &str) {
 fn main() {
     fail_on_empty_directory("rocketmq-client-cpp");
 
+    let bindings = bindgen::Builder::default()
+        // Do not generate unstable Rust code that
+        // requires a nightly rustc and enabling
+        // unstable features.
+        //.no_unstable_rust()
+        // The input header we would like to generate
+        // bindings for.
+        .header("./rocketmq-client-cpp/include/CMessage.h")
+        .header("./rocketmq-client-cpp/include/CProducer.h")
+        .header("./rocketmq-client-cpp/include/CPullConsumer.h")
+        // Finish the builder and generate the bindings.
+        .generate()
+        // Unwrap the Result and panic on failure.
+        .expect("Unable to generate bindings");
+
+    bindings
+        .write_to_file("bindings.rs")
+        .expect("Couldn't write bindings!");
+
     let _output = Command::new("sh")
         .arg("rocketmq-client-cpp/build.sh")
         .output()
