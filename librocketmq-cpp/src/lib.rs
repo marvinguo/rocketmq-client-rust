@@ -32,8 +32,6 @@ typedef enum E_CConsumeStatus{
 
 typedef int(*MessageCallBack)(CPushConsumer *, CMessageExt *);
 
-ROCKETMQCLIENT_API CPushConsumer *CreatePushConsumer(const char *groupId);
-ROCKETMQCLIENT_API int DestroyPushConsumer(CPushConsumer *consumer);
 ROCKETMQCLIENT_API int SetPushConsumerGroupID(CPushConsumer *consumer, const char *groupId);
 ROCKETMQCLIENT_API const char *GetPushConsumerGroupID(CPushConsumer *consumer);
 ROCKETMQCLIENT_API int SetPushConsumerNameServerAddress(CPushConsumer *consumer, const char *namesrv);
