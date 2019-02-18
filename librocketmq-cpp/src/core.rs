@@ -60,6 +60,9 @@ impl Producer {
             SetMessageBody(message_ptr, CString::new(body).unwrap().as_ptr());
             SetMessageTags(message_ptr, CString::new(tags).unwrap().as_ptr());
             SetMessageKeys(message_ptr, CString::new(keys).unwrap().as_ptr());
+
+            let mut message_result = CSendResult{sendStatus: 0, msgId:[0;256usize], offset:0};
+            SendMessageSync(self.producer, message_ptr, &mut message_result);
         }
     }
 }
