@@ -18,6 +18,9 @@ fn fail_on_empty_directory(name: &str) {
 fn main() {
     fail_on_empty_directory("rocketmq-client-cpp");
 
+    println!("cargo:rustc-link-lib=dylib=rocketmq-client-cpp");
+    println!("cargo:rustc-link-search=native=/rocketmq-client-cpp/bin");
+
     let bindings = bindgen::Builder::default()
         // Do not generate unstable Rust code that
         .header("./rocketmq-client-cpp/include/CMessage.h")
