@@ -9,11 +9,11 @@ repository = "https://github.com/marvinguo/rocketmq-client-rust.git"
 keywords = [ "rust", "rocketmq" ]
 edition = "2018"
 
-build = "build.rs"
+
 
 [dependencies]
 libc = "0.2"
-bindgen = "0.43"
+
 
 [dev-dependencies]
 const-cstr = "0.2"
