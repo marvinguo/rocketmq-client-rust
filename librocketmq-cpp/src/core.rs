@@ -2,30 +2,35 @@ use std::mem::drop;
 use std::ffi::CString;
 use crate::bindings::*;
 
-pub struct Consumer {
+pub struct PushConsumer {
     consumer: *mut CPushConsumer,
 }
 
-impl Consumer {
-    fn new(group_id: &str, instance_name: &str, name_server: &str) -> Consumer {
+impl PushConsumer {
+    pub fn new(group_id: &str, instance_name: &str, name_server: &str) -> PushConsumer {
         unsafe {
             let consumer_ptr = CreatePushConsumer(CString::new(group_id).unwrap().as_ptr());
             SetPushConsumerInstanceName(consumer_ptr, CString::new(instance_name).unwrap().as_ptr());
             SetPushConsumerNameServerAddress(consumer_ptr, CString::new(name_server).unwrap().as_ptr());
-            Consumer { consumer: consumer_ptr }
+            PushConsumer { consumer: consumer_ptr }
         }
     }
 
-    fn start(&self) {
+    pub fn start(&self) {
         unsafe {
             StartPushConsumer(self.consumer);
         }
     }
 
-    fn subscribe(&self) {}
+    pub fn subscribe(&self, topic: &str, expression: &str) {
+        unsafe {
+            Subscribe(self.consumer, CString::new(topic).unwrap().as_ptr(), CString::new(expression).unwrap().as_ptr());
+            RegisterMessageCallback(self.consumer, doConsumeMessage);
+        }
+    }
 }
 
-impl Drop for Consumer {
+impl Drop for PushConsumer {
     fn drop(&mut self) {
         unsafe {
             ShutdownPushConsumer(self.consumer);
@@ -61,7 +66,7 @@ impl Producer {
             SetMessageTags(message_ptr, CString::new(tags).unwrap().as_ptr());
             SetMessageKeys(message_ptr, CString::new(keys).unwrap().as_ptr());
 
-            let mut message_result = CSendResult{sendStatus: 0, msgId:[0;256usize], offset:0};
+            let mut message_result = CSendResult { sendStatus: 0, msgId: [0; 256usize], offset: 0 };
             SendMessageSync(self.producer, message_ptr, &mut message_result);
         }
     }
@@ -79,12 +84,13 @@ impl Drop for Producer {
 #[cfg(test)]
 mod tests {
     use crate::core::*;
+
     #[test]
     fn test_producer() {
         println!("1321");
 
         let x = 100;
-        let producer = Producer::new("132","123","172.16.208.204:9876");
+        let producer = Producer::new("132", "123", "172.16.208.204:9876");
         println!("1321");
         producer.send("ttt", "", "", "");
     }
