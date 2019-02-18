@@ -1,4 +1,4 @@
-//需要把cpp的指针封装成rust struct
+use binding::*;
 
 pub struct Consumer{
 
