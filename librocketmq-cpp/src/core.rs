@@ -48,7 +48,7 @@ impl Producer {
         }
     }
 
-    fn start(&self) {
+    pub fn start(&self) {
         unsafe {
             StartProducer(self.producer);
         }
