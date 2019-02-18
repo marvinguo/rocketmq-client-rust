@@ -39,7 +39,7 @@ pub struct Producer {
 }
 
 impl Producer {
-    fn new(group_id: &str, instance_name: &str, name_server: &str) -> Producer {
+    pub fn new(group_id: &str, instance_name: &str, name_server: &str) -> Producer {
         unsafe {
             let producer_ptr = CreateProducer(CString::new(group_id).unwrap().as_ptr());
             SetProducerInstanceName(producer_ptr, CString::new(instance_name).unwrap().as_ptr());
@@ -54,7 +54,7 @@ impl Producer {
         }
     }
 
-    fn send(&self, topic: &str, body: &str, tags: &str, keys: &str) {
+    pub fn send(&self, topic: &str, body: &str, tags: &str, keys: &str) {
         unsafe {
             let message_ptr = CreateMessage(CString::new(topic).unwrap().as_ptr());
             SetMessageBody(message_ptr, CString::new(body).unwrap().as_ptr());
@@ -78,7 +78,12 @@ mod tests {
     use crate::core::*;
     #[test]
     fn test_producer() {
-        let producer = Producer::new("","","");
+        println!("1321");
+
+        let x = 100;
+        let producer = Producer::new("132","123","172.16.208.204:9876");
+        println!("1321");
+        producer.send("ttt", "", "", "");
     }
 }
 
