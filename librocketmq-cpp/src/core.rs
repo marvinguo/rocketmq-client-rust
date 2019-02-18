@@ -1,5 +1,6 @@
 use std::mem::drop;
 use std::ffi::CString;
+use std::ffi::CStr;
 use crate::bindings::*;
 use std::os::raw::c_int;
 use std::option::Option;
@@ -33,13 +34,11 @@ impl PushConsumer {
 
     unsafe extern "C" fn callback(arg1: *mut CPushConsumer, arg2: *mut CMessageExt) -> c_int {
         unsafe {
-            println!("123");
-            //这里的析构有问题，看来是cpp那边自己析构的
-            //let topic = CString::from_raw(GetMessageTopic(arg2) as *mut i8);
-            //let tags = CString::from_raw(GetMessageTags(arg2) as *mut i8);
-            //let keys = CString::from_raw(GetMessageKeys(arg2) as *mut i8);
-            //let body = CString::from_raw(GetMessageBody(arg2) as *mut i8);
-            //println!("body: {:?}", body);
+            let topic = CStr::from_ptr(GetMessageTopic(arg2));
+            let tags = CStr::from_ptr(GetMessageTags(arg2));
+            let keys = CStr::from_ptr(GetMessageKeys(arg2));
+            let body = CStr::from_ptr(GetMessageBody(arg2));
+            println!("body: {:?}", body);
         }
 
         E_CConsumeStatus_E_CONSUME_SUCCESS as c_int
