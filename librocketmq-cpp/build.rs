@@ -25,7 +25,7 @@ fn main() {
         // Do not generate unstable Rust code that
         .header("./rocketmq-client-cpp/include/CMessage.h")
         .header("./rocketmq-client-cpp/include/CProducer.h")
-        .header("./rocketmq-client-cpp/include/CPullConsumer.h")
+        .header("./rocketmq-client-cpp/include/CPushConsumer.h")
         // Finish the builder and generate the bindings.
         .generate()
         // Unwrap the Result and panic on failure.
