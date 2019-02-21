@@ -1,14 +1,11 @@
+pub(crate) struct RemoteClient {}
 
+impl RemoteClient {
+    pub fn create_topic() {}
 
-pub(crate) struct RemoteClient{
-}
+    pub fn send_message() {}
 
-impl RemoteClient{
-     pub fn create_topic(){
+    pub fn pull_message() {}
 
-     }
-
-    pub fn send_message(){
-        
-    }
+    pub fn send_heartbeat() {}
 }
