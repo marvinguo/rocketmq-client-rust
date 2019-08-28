@@ -6,3 +6,6 @@ git submodule update --init --recursive
 
 
  RUSTFLAGS='-L ./rocketmq-client-cpp/bin/ -L ./rocketmq-client-cpp/bin/lib' cargo run
+
+
+123
